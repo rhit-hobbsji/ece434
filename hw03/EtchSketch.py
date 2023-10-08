@@ -11,9 +11,9 @@ import time
 
 #i2c bus and addresses
 bus = smbus.SMBus(2)
-address = 0x48
-address2 = 0x49
-
+address = 0x48 #sensor 1
+address2 = 0x49 #Sensor 2
+address3 = 0x70 #LED MATRIX
 while True:
 	#Get temp of both TMP101 sensors
 	temp = bus.read_byte_data(address, 0)
