@@ -8,7 +8,7 @@ def create_board():
     min_index = 0
     max_index = size - 1
 
-    array = [[0 for i in range(size)] for k in range(size)]
+    array = [["-" for i in range(size)] for k in range(size)]
     return array
 
 def move_left():
