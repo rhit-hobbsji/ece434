@@ -73,7 +73,7 @@ CHIP='1'
 # downsetoffests=[8] # P8_19
 # clearsetoffsets=[31] # P8_26
 
-getoffsets = [37, 38, 12, 15, 14]
+getoffsets = [13, 12, 15, 14, 35]
 setoffsets = [18, 19, 9, 8, 31]
 
 
