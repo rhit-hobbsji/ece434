@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # //////////////////////////////////////
+# Author: Jailen Hobbs 
 #       getsetEvent.py
 #   Like getset.py but uses events.
 #   Get the value of P8_16 and write it to P9_14.
