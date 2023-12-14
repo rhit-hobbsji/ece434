@@ -62,23 +62,14 @@ def clear():
 CONSUMER='getset'
 CHIP='1'
 
-# cleargetoffsets=[12] #P8_12
-# leftgetoffsets=[10] # P8_14
-# rightgetoffsets=[15] # P8_15
-# upgetoffsets=[14] # P8_16
-# downgetoffsets=[11] # P8_17
-# leftsetoffests=[18] # P9_14
-# rightsetoffests=[19] # P9_16
-# upsetoffests=[9] # P8_13
-# downsetoffests=[8] # P8_19
-# clearsetoffsets=[31] # P8_26
+# [12] #P8_12 [10] # P8_14
+# [15] # P8_15 [14] # P8_16
+# [11] # P8_17 [18] # P9_14
+# [19] # P9_16 [9] # P8_13
+# [8] # P8_19 [31] # P8_26
 
-#getoffsets = [12, 10, 15, 11, 14]
 getoffsets = [12, 19, 15, 14, 18]
 #setoffsets = [18, 19, , 8, 31]
-
-
-
 
 def print_event(event):
     if event.type == gpiod.LineEvent.RISING_EDGE:
@@ -122,7 +113,7 @@ while True:
     if ev_lines:
         for line in ev_lines:
             event = line.event_read()
-            print_event(event)
+            #print_event(event)
     vals = getlines.get_values()
     
     
@@ -130,22 +121,33 @@ while True:
     #     print(val, end=' ')
     # print('\r', end='')
 
-    #setlines.set_values(vals)
+    #setlines.set_values(vals) LED Debugging
+    
+    ####
+    #
+    # Based on input values from buttons sketch accordingly
+    #
+    ###
     
     if vals[0]:
         move_left()
+        print("Left")
         x = 1
     elif vals[1]:
         move_right()
+        print("Right")
         x = 1
     elif vals[2]:
         move_up()
+        print("Up")
         x = 1
     elif vals[3]:
         move_down()
+        print("Down")
         x = 1
     elif vals[4]:
         clear()
+        print("Clear Screen")
         x = 2
     
     if(x == 1):
