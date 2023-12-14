@@ -1,3 +1,4 @@
+************************************************************************************************************
 The code works by running the sketch.py file using "./sketch.py"
 
 User will enter their board size which will be NxN
@@ -9,3 +10,6 @@ Up is P8_15
 Down is P8_16
 Clear is P9_14
 When you click a button you will either sketch in that direction or clear if hitting the clear button. 
+
+**********************************************************************************************************
+The timing.md file holds the table data for word document questions with results from oscillscopes in lab D115
