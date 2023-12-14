@@ -74,8 +74,8 @@ CHIP='1'
 # clearsetoffsets=[31] # P8_26
 
 #getoffsets = [12, 10, 15, 11, 14]
-getoffsets = [12, 8, 15, 11, 14]
-setoffsets = [18, 19, 9, 8, 31]
+getoffsets = [12, 9, 15, 14, 18]
+#setoffsets = [18, 19, , 8, 31]
 
 
 
@@ -96,25 +96,10 @@ chip = gpiod.Chip(CHIP)
 
 getlines = chip.get_lines(getoffsets)
 getlines.request(consumer=CONSUMER, type=gpiod.LINE_REQ_EV_BOTH_EDGES)
-# rgetlines = chip.get_lines(rightgetoffsets)
-# rgetlines.request(consumer=CONSUMER, type=gpiod.LINE_REQ_EV_BOTH_EDGES)
-# ugetlines = chip.get_lines(upgetoffsets)
-# ugetlines.request(consumer=CONSUMER, type=gpiod.LINE_REQ_EV_BOTH_EDGES)
-# dgetlines = chip.get_lines(downgetoffsets)
-# dgetlines.request(consumer=CONSUMER, type=gpiod.LINE_REQ_EV_BOTH_EDGES)
-# cgetlines = chip.get_lines(cleargetoffsets)
-# cgetlines.request(consumer=CONSUMER, type=gpiod.LINE_REQ_EV_BOTH_EDGES)
 
-setlines = chip.get_lines(setoffsets)
-setlines.request(consumer=CONSUMER, type=gpiod.LINE_REQ_DIR_OUT)
-# rsetlines = chip.get_lines(rightsetoffests)
-# rsetlines.request(consumer=CONSUMER, type=gpiod.LINE_REQ_DIR_OUT)
-# usetlines = chip.get_lines(upsetoffests)
-# usetlines.request(consumer=CONSUMER, type=gpiod.LINE_REQ_DIR_OUT)
-# dsetlines = chip.get_lines(downsetoffests)
-# dsetlines.request(consumer=CONSUMER, type=gpiod.LINE_REQ_DIR_OUT)
-# csetlines = chip.get_lines(clearsetoffsets)
-# csetlines.request(consumer=CONSUMER, type=gpiod.LINE_REQ_DIR_OUT)
+# setlines = chip.get_lines(setoffsets)
+# setlines.request(consumer=CONSUMER, type=gpiod.LINE_REQ_DIR_OUT)
+
 
 print("Hit ^C to stop")
 
@@ -145,7 +130,7 @@ while True:
         print(val, end=' ')
     print('\r', end='')
 
-    setlines.set_values(vals)
+    #setlines.set_values(vals)
     
     if vals[0]:
         move_left()
