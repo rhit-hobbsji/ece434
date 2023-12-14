@@ -161,9 +161,9 @@ while True:
     if(x != 1):
         array[col][row] = "x" 
     
-    for r in array:
-        for element in r:
-            print(element, end=" ")
-        print()
+    # for r in array:
+    #     for element in r:
+    #         print(element, end=" ")
+    #     print()
     print()
     
