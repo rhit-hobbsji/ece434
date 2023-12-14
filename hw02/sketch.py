@@ -126,30 +126,40 @@ while True:
     vals = getlines.get_values()
     
     
-    for val in vals:
-        print(val, end=' ')
-    print('\r', end='')
+    # for val in vals:
+    #     print(val, end=' ')
+    # print('\r', end='')
 
     #setlines.set_values(vals)
     
     if vals[0]:
         move_left()
+        x = 1
     elif vals[1]:
         move_right()
+        x = 1
     elif vals[2]:
         move_up()
+        x = 1
     elif vals[3]:
         move_down()
+        x = 1
     elif vals[4]:
         clear()
-        x = 1
+        x = 2
     
-    if(x != 1):
+    if(x == 1):
         array[col][row] = "x" 
+        for r in array:
+            for element in r:
+                print(element, end=" ")
+            print()
+        print()
+    if(x == 2):
+        for r in array:
+            for element in r:
+                print(element, end=" ")
+            print()
+        print()
     
-    # for r in array:
-    #     for element in r:
-    #         print(element, end=" ")
-    #     print()
-    print()
     
