@@ -11,8 +11,8 @@ tmp2 = 0x49 #Sensor 2
 
 delay = 1; # Delay between images in s
 
-bus.write_byte_data(matrix, 0x21, 0)   # Start oscillator (p10)
-bus.write_byte_data(matrix, 0x81, 0)   # Disp on, blink off (p11)
+# bus.write_byte_data(matrix, 0x21, 0)   # Start oscillator (p10)
+# bus.write_byte_data(matrix, 0x81, 0)   # Disp on, blink off (p11)
 bus.write_byte_data(matrix, 0xe7, 0)   # Full brightness (page 15)
 
 # The first byte is GREEN, the second is RED.
