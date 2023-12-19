@@ -13,3 +13,16 @@ When you click a button you will either sketch in that direction or clear if hit
 
 **********************************************************************************************************
 The timing.md file holds the table data for word document questions with results from oscillscopes in lab D115
+
+
+# hw02 grading
+
+| Points      | Description | Comment
+| ----------- | ----------- | -------
+|  2/2 | Buttons and LEDs 
+|  8/8 | Etch-a-Sketch works
+|  2/2 | Measuring a gpio pin on an Oscilloscope 
+|  2/2 | Questions answered
+|  3/4 | Table complete | It would have been better to combine all the tables into one table.
+|  2/2 | gpiod
+| 19/20   | **Total**
