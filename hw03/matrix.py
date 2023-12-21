@@ -1,6 +1,11 @@
 #!/usr/bin/env python3
-# Write an 8x8 Red/Green LED matrix
-# https://www.adafruit.com/product/902
+# Etch SKetch with an 8x8 Red/Green LED matrix and Rotary Encoders and TMP101 sensors
+#//////////////////////////////////////
+#Author : Jailen Hobbs
+#Program: Reads from address 0x48 and 0x49 and 0x70 of I2C bus 2
+#Hardware i2c configuration to pins 19 and 20 with one TMP101 GND and one floating and a ocnnection to LCD matrix
+#EQEP pins 33 and 35 are for left and right
+#EQEP pins 41 and 42 are for up and down
 
 import smbus
 import time
@@ -129,6 +134,7 @@ while True:
     elif(vertData < 0):
         move_down()   
      
+    #if temperatures reach 24 degrees celsius refresh
     if(temp > 23) | (temp2 > 23):
         print("TOO HOT GAME Reset")
         clear()
@@ -137,5 +143,6 @@ while True:
     vertEncoderOldData = vertEncoderCurData
     horzEncoderOldData = horzEncoderCurData
     
+    #debounce
     time.sleep(delay)
 
