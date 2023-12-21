@@ -62,7 +62,7 @@ array = [0x01, 0x00, 0x02, 0x00, 0x04, 0x00, 0x08, 0x00,
     0x10, 0x00, 0x20, 0x00, 0x40, 0x00, 0x80, 0x00
 ]
 
-curCol = 1
+curCol = 0
 curPos = 0 #curRow
 
 bus.write_i2c_block_data(matrix, 0, array)
@@ -85,11 +85,15 @@ def move_up():
     print("up")
     global curCol
     curCol = curCol + 1
-    
+    if(curCol > 7): curCol = 0
     array[curPos] = array[curPos] | pow(2, curCol)
 
 def move_down():
     print("down")
+    global curCol
+    curCol = curCol + 1
+    
+    array[curPos] = array[curPos] | pow(2, curCol)
 
 def clear():
     print("clear")
