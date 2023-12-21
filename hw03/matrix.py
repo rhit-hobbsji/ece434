@@ -91,7 +91,7 @@ while True:
     horzEnoderCurData = int(l.read())
     l.close()
     
-    r = open(pathe1+'/count', 'r')
+    r = open(pathe2+'/count', 'r')
     r.seek(0)
     vertEnoderCurData = int(r.read())
     r.close()
