@@ -62,10 +62,6 @@ f = open(pathe2+'/enable', 'w')
 f.write('1')
 f.close()
 
-#Set varaibles for both encoders l = left R - Right position of your encoders
-l = open(pathe1+'/count', 'r')
-r = open(pathe1+'/count', 'r')
-
 horzEncoderOldData = 5000
 horzEncoderCurData = 5000
 
@@ -88,14 +84,21 @@ bus.write_i2c_block_data(matrix, 0, array)
 while True:
     temp = bus.read_byte_data(tmp1, 0)
     temp2 = bus.read_byte_data(tmp2, 0)
-    r.seek(0)
-    l.seek(0)
     
-    vertEnoderCurData = int(r.read())
+    #Set varaibles for both encoders l = left R - Right position of your encoders
+    l = open(pathe1+'/count', 'r')
+    l.seek(0)
     horzEnoderCurData = int(l.read())
+    l.close()
+    
+    r = open(pathe1+'/count', 'r')
+    r.seek(0)
+    vertEnoderCurData = int(r.read())
+    r.close()
     
     horzData = (int(horzEnoderCurData) - horzEncoderOldData)
     vertData = (int(vertEnoderCurData) - vertEncoderOldData)
+    
     print(vertData)
     print(horzData)
     if(horzData > 0):
@@ -110,6 +113,7 @@ while True:
     if(temp > 28) | (temp2 > 28):
         print("TOO HOT GAME OVER INPUTS STUCK")
         break
+    
     bus.write_i2c_block_data(matrix, 0, array)
     vertEncoderOldData = vertEncoderCurData
     horzEncoderOldData = horzEncoderCurData
