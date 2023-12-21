@@ -8,8 +8,11 @@ import time
 def move_left():
     print("left")
     
+    
 def move_right():
     print("right")
+    curPos = curPos + 1
+    array[curPos] = array[curPos] | (2 ** curPos)
 
 def move_up():
     print("up")
@@ -73,7 +76,7 @@ bus.write_byte_data(matrix, 0x81, 0)   # Disp on, blink off (p11)
 bus.write_byte_data(matrix, 0xe7, 0)   # Full brightness (page 15)
 
 # The first byte is GREEN, the second is RED.
-array = [0x01, 0x03, 0x02, 0x00, 0x04, 0x00, 0x08, 0x00,
+array = [0x01, 0x00, 0x02, 0x00, 0x04, 0x00, 0x08, 0x00,
     0x10, 0x00, 0x20, 0x00, 0x40, 0x00, 0x80, 0x00
 ]
 
