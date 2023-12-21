@@ -91,11 +91,11 @@ while True:
     r.seek(0)
     l.seek(0)
     
-    vertEnoderCurData = r.read()
-    horzEnoderCurData = l.read()
+    vertEnoderCurData = int(r.read())
+    horzEnoderCurData = int(l.read())
     
-    horzData = (horzEnoderCurData - horzEncoderOldData)
-    vertData = (vertEnoderCurData - vertEncoderOldData)
+    horzData = (int(horzEnoderCurData) - horzEncoderOldData)
+    vertData = (int(vertEnoderCurData) - vertEncoderOldData)
     if(horzData > 0):
         move_right()
     elif (horzData < 0):
