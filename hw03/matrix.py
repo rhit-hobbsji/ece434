@@ -63,7 +63,7 @@ array = [0x01, 0x00, 0x02, 0x00, 0x04, 0x00, 0x08, 0x00,
 ]
 
 curCol = 1
-curRow = 0
+curPos = 0 #curRow
 
 bus.write_i2c_block_data(matrix, 0, array)
 
