@@ -5,24 +5,6 @@
 import smbus
 import time
 
-def move_left():
-    print("left")
-    
-    
-def move_right():
-    print("right")
-    curPos = curPos + 1
-    array[curPos] = array[curPos] | (2 ** curPos)
-
-def move_up():
-    print("up")
-
-def move_down():
-    print("down")
-
-def clear():
-    print("clear")
-
 bus = smbus.SMBus(2)  # Use i2c bus 1
 matrix = 0x70         # Use address 0x70
 tmp1 = 0x48 #sensor 1
@@ -83,6 +65,24 @@ array = [0x01, 0x00, 0x02, 0x00, 0x04, 0x00, 0x08, 0x00,
 curPos = 0
 
 bus.write_i2c_block_data(matrix, 0, array)
+
+def move_left():
+    print("left")
+    
+    
+def move_right():
+    print("right")
+    curPos = curPos + 1
+    array[curPos] = array[curPos] | (2 ** curPos)
+
+def move_up():
+    print("up")
+
+def move_down():
+    print("down")
+
+def clear():
+    print("clear")
 
 while True:
     temp = bus.read_byte_data(tmp1, 0)
