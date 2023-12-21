@@ -78,7 +78,7 @@ def move_right():
     global curPos 
     if(curPos > 15): return
     curPos = curPos + 2
-    array[curPos] = array[curPos] | (2 ** curCol)
+    array[curPos] = array[curPos] | (pow(2, curCol))
     
 
 def move_up():
@@ -88,7 +88,7 @@ def move_up():
         curCol = 2 ** curCol
     else: curCol = 1
     
-    array[curPos] = array[curPos] | (2 ** curCol)
+    array[curPos] = array[curPos] | pow(2, curCol)
 
 def move_down():
     print("down")
