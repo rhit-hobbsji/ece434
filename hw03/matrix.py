@@ -129,8 +129,6 @@ while True:
     elif(vertData < 0):
         move_down()   
      
-    print(temp)
-    print(temp2)
     if(temp > 23) | (temp2 > 23):
         print("TOO HOT GAME Reset")
         clear()
