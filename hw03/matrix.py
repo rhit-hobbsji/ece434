@@ -68,9 +68,11 @@ curPos = 0 #curRow
 bus.write_i2c_block_data(matrix, 0, array)
 
 def move_left():
-    global curPos 
-    if(curPos > 0): return
     print("left")
+    global curPos 
+    if(curPos < 1): return 
+    curPos = curPos - 2
+    array[curPos] = array[curPos] | (pow(2, curCol))
     
     
 def move_right():
@@ -91,12 +93,14 @@ def move_up():
 def move_down():
     print("down")
     global curCol
-    curCol = curCol + 1
+    curCol = curCol - 1
     
     array[curPos] = array[curPos] | pow(2, curCol)
 
 def clear():
     print("clear")
+    for i in range(len(array)):
+        array[i] = 0x00
 
 while True:
     temp = bus.read_byte_data(tmp1, 0)
@@ -125,6 +129,8 @@ while True:
     elif(vertData < 0):
         move_down()   
      
+    print(temp)
+    print(temp2)
     if(temp > 28) | (temp2 > 28):
         print("TOO HOT GAME OVER INPUTS STUCK")
         break
