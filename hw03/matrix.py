@@ -94,7 +94,7 @@ def move_down():
     print("down")
     global curCol
     curCol = curCol - 1
-    
+    if(curCol < 0): curCol = 0
     array[curPos] = array[curPos] | pow(2, curCol)
 
 def clear():
