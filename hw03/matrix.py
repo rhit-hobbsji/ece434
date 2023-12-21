@@ -133,7 +133,7 @@ while True:
     print(temp2)
     if(temp > 23) | (temp2 > 23):
         print("TOO HOT GAME OVER INPUTS STUCK")
-        break
+        clear()
     
     bus.write_i2c_block_data(matrix, 0, array)
     vertEncoderOldData = vertEncoderCurData
