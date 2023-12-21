@@ -88,16 +88,16 @@ while True:
     #Set varaibles for both encoders l = left R - Right position of your encoders
     l = open(pathe1+'/count', 'r')
     l.seek(0)
-    horzEnoderCurData = int(l.read())
+    horzEncoderCurData = int(l.read())
     l.close()
     
     r = open(pathe2+'/count', 'r')
     r.seek(0)
-    vertEnoderCurData = int(r.read())
+    vertEncoderCurData = int(r.read())
     r.close()
     
-    horzData = (int(horzEnoderCurData) - horzEncoderOldData)
-    vertData = (int(vertEnoderCurData) - vertEncoderOldData)
+    horzData = (horzEncoderCurData - horzEncoderOldData)
+    vertData = (vertEncoderCurData - vertEncoderOldData)
     
     print(vertData)
     print(horzData)
@@ -117,4 +117,6 @@ while True:
     bus.write_i2c_block_data(matrix, 0, array)
     vertEncoderOldData = vertEncoderCurData
     horzEncoderOldData = horzEncoderCurData
+    
+    time.sleep(0.3)
 
