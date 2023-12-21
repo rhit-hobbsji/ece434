@@ -131,7 +131,7 @@ while True:
      
     print(temp)
     print(temp2)
-    if(temp > 28) | (temp2 > 28):
+    if(temp > 23) | (temp2 > 23):
         print("TOO HOT GAME OVER INPUTS STUCK")
         break
     
