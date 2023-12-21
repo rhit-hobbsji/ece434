@@ -96,6 +96,8 @@ while True:
     
     horzData = (int(horzEnoderCurData) - horzEncoderOldData)
     vertData = (int(vertEnoderCurData) - vertEncoderOldData)
+    print(vertData)
+    print(horzData)
     if(horzData > 0):
         move_right()
     elif (horzData < 0):
