@@ -14,8 +14,8 @@ hAddr2 = '49'
 #i2c bus
 i2cbus = '2'
 
-path1 = '/sys/class/i2c-adapter/i2c-'+i2cbus+'/' + i2cbus + '-00' + hAddr + 'hwmon/hwmon0'
-path2 = '/sys/class/i2c-adapter/i2c-'+i2cbus+'/' + i2cbus + '-00' + hAddr2 + 'hwmon/hwmon0'
+path1 = '/sys/class/i2c-adapter/i2c-'+i2cbus+'/' + i2cbus + '-00' + hAddr + '/hwmon/hwmon0'
+path2 = '/sys/class/i2c-adapter/i2c-'+i2cbus+'/' + i2cbus + '-00' + hAddr2 + '/hwmon/hwmon0'
 
 delay = 0.3
 
