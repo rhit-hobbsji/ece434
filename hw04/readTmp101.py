@@ -15,7 +15,7 @@ hAddr2 = '49'
 i2cbus = '2'
 
 path1 = '/sys/class/i2c-adapter/i2c-'+i2cbus+'/' + i2cbus + '-00' + hAddr + '/hwmon/hwmon0'
-path2 = '/sys/class/i2c-adapter/i2c-'+i2cbus+'/' + i2cbus + '-00' + hAddr2 + '/hwmon/hwmon0'
+path2 = '/sys/class/i2c-adapter/i2c-'+i2cbus+'/' + i2cbus + '-00' + hAddr2 + '/hwmon/hwmon1'
 
 delay = 0.3
 
@@ -23,11 +23,11 @@ while True:
 	#Get temp of both TMP101 sensors
     f = open(path1 + '/temp1_input', 'r')
     f.seek(0)
-    temp = int(f.read)
+    temp = int(f.read())
     f.close()
     f = open(path2 + '/temp1_input', 'r')
     f.seek(0)
-    temp2 = int(f.read)
+    temp2 = int(f.read())
     f.close()
     print(str(temp)+"-Sensor1 "+ str(temp2) + "-Sensor2", end = "\r")
     time.sleep(delay)
