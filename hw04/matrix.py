@@ -1,11 +1,8 @@
 #!/usr/bin/env python3
-# Etch SKetch with an 8x8 Red/Green LED matrix and Rotary Encoders and TMP101 sensors
+# Etch SKetch with Python Flask local server 192.168.7.2:8081
 #//////////////////////////////////////
 #Author : Jailen Hobbs
-#Program: Reads from address 0x48 and 0x49 and 0x70 of I2C bus 2
-#Hardware i2c configuration to pins 19 and 20 with one TMP101 GND and one floating and a ocnnection to LCD matrix
-#EQEP pins 33 and 35 are for left and right
-#EQEP pins 41 and 42 are for up and down
+#Program: Plays etch-sketch connected to bus2 of i2c with flask server
 
 import smbus
 from flask import Flask, render_template
