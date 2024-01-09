@@ -36,7 +36,7 @@ def index():
         'ledRed': led_lines.get_values()[0],
         'ledGreen': led_lines.get_values()[1]
     }
-    return render_template('index.html', **templateData)
+    return render_template('index3.html', **templateData)
     
 @app.route("/<deviceName>/<action>")
 def action(deviceName, action):
@@ -58,7 +58,7 @@ def action(deviceName, action):
         'ledRed': led_lines.get_values()[0],
         'ledGreen': led_lines.get_values()[1]
     }
-    return render_template('index.html', **templateData)
+    return render_template('index3.html', **templateData)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=8081, debug=True)
