@@ -21,11 +21,11 @@ delay = 0.3
 
 while True:
 	#Get temp of both TMP101 sensors
-    f = open(path1, 'r')
+    f = open(path1 + '/temp1_input', 'r')
     f.seek(0)
     temp = int(f.read)
     f.close()
-    f = open(path2, 'r')
+    f = open(path2 + '/temp1_input', 'r')
     f.seek(0)
     temp2 = int(f.read)
     f.close()
