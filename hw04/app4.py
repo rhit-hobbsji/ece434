@@ -1,46 +1,64 @@
 #!/usr/bin/env python3
-# From: https://towardsdatascience.com/python-webserver-with-flask-and-raspberry-pi-398423cc6f5d
 import gpiod
-import sys
 from flask import Flask, render_template, request
+
 app = Flask(__name__)
-#define sensors GPIOs
-getoffsets=[14] # P8_16
-#define actuators GPIOs
-setoffests=[18] # P9_14
-#initialize GPIO status variables
-CHIP='1'
-# Define button and PIR sensor pins as an input
+
+# Define sensors GPIOs
+button_offsets = [14, 15, 12, 13]  # GPIO pins for buttons
+
+# Define actuators GPIOs
+led_offsets = [18, 28]  # GPIO pins for LEDs
+
+CHIP = '1'
+
+# Initialize GPIO for buttons
 chip = gpiod.Chip(CHIP)
-getlines = chip.get_lines(getoffsets)
-getlines.request(consumer="app4.py", type=gpiod.LINE_REQ_DIR_IN)
-# Define led pins as output
-setlines = chip.get_lines(setoffests)
-setlines.request(consumer="app4.py", type=gpiod.LINE_REQ_DIR_OUT)
-# turn leds OFF 
-setlines.set_values([0])
+button_lines = chip.get_lines(button_offsets)
+button_lines.request(consumer="app4.py", type=gpiod.LINE_REQ_DIR_IN)
+
+# Initialize GPIO for LEDs
+led_lines = chip.get_lines(led_offsets)
+led_lines.request(consumer="app4.py", type=gpiod.LINE_REQ_DIR_OUT)
+
+# Turn LEDs OFF 
+led_lines.set_values([0, 0])
 
 @app.route("/")
 def index():
-	# Read GPIO Status
-	vals = getlines.get_values()
-	templateData = {
-	 	'button'  : getlines.get_values()[0],
-  		'ledRed'  : setlines.get_values()[0]
+    # Read GPIO Status for buttons
+    button_values = button_lines.get_values()
+    templateData = {
+        'button1': button_values[0],
+        'button2': button_values[1],
+        'button3': button_values[2],
+        'button4': button_values[3],
+        'ledRed': led_lines.get_values()[0],
+        'ledGreen': led_lines.get_values()[1]
     }
-	return render_template('index.html', **templateData)
-	
+    return render_template('index.html', **templateData)
+    
 @app.route("/<deviceName>/<action>")
 def action(deviceName, action):
-	if action == "on":
-		setlines.set_values([1])
-	if action == "off":
-		setlines.set_values([0])
-		     
-	templateData = {
-	 	'button'  : getlines.get_values()[0],
-  		'ledRed'  : setlines.get_values()[0]
-	}
-	return render_template('index3.html', **templateData)
+    if deviceName in ["ledRed", "ledGreen"]:
+        index = ["ledRed", "ledGreen"].index(deviceName)
+        led_values = led_lines.get_values()
+        if action == "on":
+            led_values[index] = 1
+        elif action == "off":
+            led_values[index] = 0
+        led_lines.set_values(led_values)
+
+    setlines = button_lines.get_values()  # Use setlines for button values
+    templateData = {
+        'button1': setlines[0],
+        'button2': setlines[1],
+        'button3': setlines[2],
+        'button4': setlines[3],
+        'ledRed': led_lines.get_values()[0],
+        'ledGreen': led_lines.get_values()[1]
+    }
+    return render_template('index.html', **templateData)
+
 if __name__ == "__main__":
-   app.run(host='0.0.0.0', port=8081, debug=True)
+    app.run(host='0.0.0.0', port=8081, debug=True)
