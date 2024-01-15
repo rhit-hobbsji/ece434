@@ -77,23 +77,17 @@ reg_status2 = struct.unpack("<L", packed_reg2)[0]
 
 reg_status2 |= SW2
 
-print(reg_status2)
-print(reg_status)
-
 mem2[GPIO_OE:GPIO_OE+4] = struct.pack("<L", reg_status2)
-print(mem2[GPIO_OE:GPIO_OE])
 
 try:
   while(True):
     gpio1_datain = mem[GPIO_DATAIN:GPIO_DATAIN + 4]
     gpio2_datain = mem2[GPIO_DATAIN:GPIO_DATAIN + 4]
     
-    print(gpio1_datain)
-    
     inp1_status = struct.unpack("<L", gpio1_datain)[0]
     inp2_status = struct.unpack("<L", gpio2_datain)[0]
     
-    #print(inp1_status)
+    print(inp1_status & SW1)
     #print(inp2_status)
 
     
