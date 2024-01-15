@@ -77,7 +77,8 @@ reg_status2 = struct.unpack("<L", packed_reg2)[0]
 
 reg_status2 |= SW2
 
-print(reg_status2+ '-' + reg_status)
+print(reg_status2)
+print(reg_status)
 
 mem2[GPIO_OE:GPIO_OE+4] = struct.pack("<L", reg_status2)
 
