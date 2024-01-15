@@ -84,12 +84,16 @@ try:
     gpio1_datain = mem[GPIO_DATAIN:GPIO_DATAIN + 4]
     gpio2_datain = mem2[GPIO_DATAIN:GPIO_DATAIN + 4]
     
-    if(gpio1_datain & SW1):
+    inp1_status = struct.unpack("<L", gpio1_datain)[0]
+    inp2_status = struct.unpack("<L", gpio2_datain)[0]
+
+    
+    if(inp1_status & SW1):
       mem[GPIO_SETDATAOUT:GPIO_SETDATAOUT+4] = struct.pack("<L", USR3)
     else:
       mem[GPIO_CLEARDATAOUT:GPIO_CLEARDATAOUT+4] = struct.pack("<L", USR3)
     
-    if(gpio2_datain & SW2):
+    if(inp2_status & SW2):
        mem2[GPIO_SETDATAOUT:GPIO_SETDATAOUT+4] = struct.pack("<L", USR2)
     else:
       mem[GPIO_CLEARDATAOUT:GPIO_CLEARDATAOUT+4] = struct.pack("<L", USR2)
