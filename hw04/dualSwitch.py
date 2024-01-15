@@ -81,6 +81,7 @@ print(reg_status2)
 print(reg_status)
 
 mem2[GPIO_OE:GPIO_OE+4] = struct.pack("<L", reg_status2)
+print(mem2[GPIO_OE+1])
 
 try:
   while(True):
