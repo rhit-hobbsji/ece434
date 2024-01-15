@@ -86,6 +86,9 @@ try:
     
     inp1_status = struct.unpack("<L", gpio1_datain)[0]
     inp2_status = struct.unpack("<L", gpio2_datain)[0]
+    
+    print(inp1_status)
+    print(inp2_status)
 
     
     if(inp1_status & SW1):
