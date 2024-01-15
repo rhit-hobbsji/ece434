@@ -77,6 +77,8 @@ reg_status2 = struct.unpack("<L", packed_reg2)[0]
 
 reg_status2 |= SW2
 
+print(reg_status2+ '-' + reg_status)
+
 mem2[GPIO_OE:GPIO_OE+4] = struct.pack("<L", reg_status2)
 
 try:
@@ -87,8 +89,8 @@ try:
     inp1_status = struct.unpack("<L", gpio1_datain)[0]
     inp2_status = struct.unpack("<L", gpio2_datain)[0]
     
-    print(inp1_status)
-    print(inp2_status)
+    #print(inp1_status)
+    #print(inp2_status)
 
     
     if(inp1_status & SW1):
