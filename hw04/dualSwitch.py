@@ -22,7 +22,17 @@ GPIO1_size = 0x4804cfff-GPIO1_offset
 GPIO_OE = 0x134
 GPIO_SETDATAOUT = 0x194
 GPIO_CLEARDATAOUT = 0x190
-USR3 = 1<<24
+USR2 = 1 << 23
+USR3 = 1 << 24
+
+GPIO_DATAIN = 0x138
+GPIO_DATAOUT = 0x13C
+SW1 = 1 << 14
+
+GPIO2_offset = 0x481A_C000
+GPIO2_size = 0x481Acfff-GPIO1_offset
+SW2 = 1 << 1
+
 
 # Next we need to make the mmap, using the desired size and offset:
 with open("/dev/mem", "r+b" ) as f:
@@ -43,6 +53,8 @@ reg_status = struct.unpack("<L", packed_reg)[0]
 # We now have the 32-bit integer value of the register, so we can configure 
 # the LED as an output by clearing its bit:
 reg_status &= ~(USR3)
+reg_status &= ~(USR2)
+reg_status |= SW1
 
 # Now all that's left to do is to pack it little-endian back into a string and update the mmap:
 
@@ -54,12 +66,36 @@ mem[GPIO_OE:GPIO_OE+4] = struct.pack("<L", reg_status)
 # so we would need to do the same process of unpacking, manipulating then repacking. 
 # That's what the SETDATAOUT and CLEARDATAOUT registers are for. 
 # Writes to them affect only the pins whose bits are set to 1, making the next step much easier:
+
+with open("/dev/mem", "r+b" ) as g:
+  mem2 = mmap(g.fileno(), GPIO2_size, offset=GPIO2_offset)
+
+
+packed_reg2 = mem2[GPIO_OE:GPIO_OE+4]
+
+reg_status2 = struct.unpack("<L", packed_reg2)[0]
+
+reg_status2 |= SW2
+
+mem2[GPIO_OE:GPIO_OE+4] = struct.pack("<L", reg_status2)
+
 try:
   while(True):
-    mem[GPIO_SETDATAOUT:GPIO_SETDATAOUT+4] = struct.pack("<L", USR3)
-    time.sleep(0.5)
-    mem[GPIO_CLEARDATAOUT:GPIO_CLEARDATAOUT+4] = struct.pack("<L", USR3)
+    gpio1_datain = mem[GPIO_DATAIN:GPIO_DATAIN + 4]
+    gpio2_datain = mem2[GPIO_DATAIN:GPIO_DATAIN + 4]
+    
+    if(gpio1_datain & SW1):
+      mem[GPIO_SETDATAOUT:GPIO_SETDATAOUT+4] = struct.pack("<L", USR3)
+    else:
+      mem[GPIO_CLEARDATAOUT:GPIO_CLEARDATAOUT+4] = struct.pack("<L", USR3)
+    
+    if(gpio2_datain & SW2):
+       mem2[GPIO_SETDATAOUT:GPIO_SETDATAOUT+4] = struct.pack("<L", USR2)
+    else:
+      mem[GPIO_CLEARDATAOUT:GPIO_CLEARDATAOUT+4] = struct.pack("<L", USR2)
+    
     time.sleep(0.5)
 
 except KeyboardInterrupt:
   mem.close()
+  mem2.close()
