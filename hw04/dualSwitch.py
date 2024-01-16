@@ -3,6 +3,8 @@
 from mmap import mmap
 import time, struct
 
+# Modified by Jailen Hobbs
+
 # Mapping the entire /dev/mem file would require that over a gigabyte be
 # allocated in Python's heap, so the offset address and size variables are 
 # used to keep the mmap as small as possible, in this case just the GPIO1 register. 
@@ -27,10 +29,13 @@ USR3 = 1 << 24
 
 GPIO_DATAIN = 0x138
 GPIO_DATAOUT = 0x13C
+
+#P8_16 GPIO-1[14]
 SW1 = 1 << 14
 
+#P8_18 GPIO-2[1]
 GPIO2_offset = 0x481A_C000
-GPIO2_size = 0x481Acfff-GPIO1_offset
+GPIO2_size = 0x481Acfff-GPIO2_offset
 SW2 = 1 << 1
 
 
@@ -86,8 +91,8 @@ try:
     inp1_status = struct.unpack("<L", gpio1_datain)[0]
     inp2_status = struct.unpack("<L", gpio2_datain)[0]
     
-    print(str(inp2_status & (1<<1)) + "-" + str(SW2))
-    print(str(inp1_status & (1<<14)) + "-" + str(SW1))
+    #print(str(inp2_status & (1<<1)) + "-" + str(SW2))
+    #print(str(inp1_status & (1<<14)) + "-" + str(SW1))
 
     
     if(inp1_status & SW1):
