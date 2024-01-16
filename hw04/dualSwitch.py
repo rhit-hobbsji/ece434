@@ -74,7 +74,7 @@ with open("/dev/mem", "r+b" ) as g:
 packed_reg2 = mem2[GPIO_OE:GPIO_OE+4]
 
 reg_status2 = struct.unpack("<L", packed_reg2)[0]
-reg_status2 = SW2
+reg_status2 |= (SW2)
 
 mem2[GPIO_OE:GPIO_OE+4] = struct.pack("<L", reg_status2)
 
@@ -86,7 +86,7 @@ try:
     inp1_status = struct.unpack("<L", gpio1_datain)[0]
     inp2_status = struct.unpack("<L", gpio2_datain)[0]
     
-    print(str(inp2_status) + "-" + str(SW2))
+    print(str(inp2_status & (1<<1)) + "-" + str(SW2))
     print(str(inp1_status & (1<<14)) + "-" + str(SW1))
 
     
