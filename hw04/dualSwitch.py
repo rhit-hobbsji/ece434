@@ -74,9 +74,7 @@ with open("/dev/mem", "r+b" ) as g:
 packed_reg2 = mem2[GPIO_OE:GPIO_OE+4]
 
 reg_status2 = struct.unpack("<L", packed_reg2)[0]
-
-reg_status2 &= ~(SW2)
-reg_status2 |= SW2
+reg_status2 = SW2
 
 mem2[GPIO_OE:GPIO_OE+4] = struct.pack("<L", reg_status2)
 
