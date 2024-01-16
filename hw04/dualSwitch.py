@@ -96,7 +96,7 @@ try:
       mem[GPIO_CLEARDATAOUT:GPIO_CLEARDATAOUT+4] = struct.pack("<L", USR3)
     
     if(inp2_status & SW2):
-       mem2[GPIO_SETDATAOUT:GPIO_SETDATAOUT+4] = struct.pack("<L", USR2)
+       mem[GPIO_SETDATAOUT:GPIO_SETDATAOUT+4] = struct.pack("<L", USR2)
     else:
       mem[GPIO_CLEARDATAOUT:GPIO_CLEARDATAOUT+4] = struct.pack("<L", USR2)
     
