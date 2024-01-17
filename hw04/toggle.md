@@ -1,8 +1,9 @@
 |time.sleep(x)| Oscilloscope Speed (ns)|
 |-|-|
-|0.1||
-|0.01||
-|0.001||
-|0.0001||
-|0.00001||
-|0.000001||
+|0.0002| 654 |
+|0.0001| 536 |
+|0.00005| 421 |
+|0.00002| 221 |
+|0.00001| 215 |
+
+A little faster compared to previous measrements taken earlier this year
