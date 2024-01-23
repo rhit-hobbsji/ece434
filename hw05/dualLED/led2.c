@@ -109,11 +109,9 @@ static struct attribute_group attr_group = {
 
 static struct kobject *ebb_kobj;   /// The pointer to the kobject
 static struct task_struct *task1;  /// The pointer to the thread task1
-static struct thread_data data1;
 
 static struct kobject *ebb_kobj2;  /// The pointer to the kobject
 static struct task_struct *task2;  /// The pointer to the thread task2
-static struct thread_data data2;
 
 /** @brief The LED Flasher main kthread loop
  *
@@ -165,6 +163,7 @@ static int flash2(void *arg) {
  */
 static int __init ebbLED_init(void) {
   int result = 0;
+  int result2 = 0;
 
   printk(KERN_INFO "EBB LED: Initializing the EBB LED LKM\n");
   sprintf(ledName, "led%d", gpioLED);  // Create the gpio115 name for /sys/ebb/led49
@@ -213,8 +212,8 @@ static int __init ebbLED_init(void) {
     return PTR_ERR(task1);
   }
 
-  task2 = kthread_run(flash2, 200, "LED2_flash_thread");  // Start the LED flashing thread
-  if (IS_ERR(task2)) {                                    // Kthread name is LED_flash_thread
+  task2 = kthread_run(flash2, NULL, "LED2_flash_thread");  // Start the LED flashing thread
+  if (IS_ERR(task2)) {                                     // Kthread name is LED_flash_thread
     printk(KERN_ALERT "EBB LED2: failed to create the task2\n");
     return PTR_ERR(task2);
   }
