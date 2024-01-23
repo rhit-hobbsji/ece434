@@ -34,7 +34,7 @@ static int __init ebb_gpio_init(void) {
   gpio_direction_input(gpioButton1);
   gpio_export(gpioButton1, false);
   irqNumber1 = gpio_to_irq(gpioButton1);
-  result = request_irq(irqNumber1, (irq_handler_t)ebb_gpio_irq_handler, IRQF_TRIGGER_RISING, "ebb_gpio_handler1", NULL);
+  result = request_irq(irqNumber1, (irq_handler_t)ebb_gpio_irq_handler, IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING, "ebb_gpio_handler1", NULL);
 
   // LED2 setup
   gpio_request(gpioLED2, "sysfs");
@@ -46,7 +46,7 @@ static int __init ebb_gpio_init(void) {
   gpio_direction_input(gpioButton2);
   gpio_export(gpioButton2, false);
   irqNumber2 = gpio_to_irq(gpioButton2);
-  result = request_irq(irqNumber2, (irq_handler_t)ebb_gpio_irq_handler, IRQF_TRIGGER_RISING, "ebb_gpio_handler2", NULL);
+  result = request_irq(irqNumber2, (irq_handler_t)ebb_gpio_irq_handler, IRQF_TRIGGER_RISING | IRQF_TRIGGER_FALLING, "ebb_gpio_handler2", NULL);
 
   return result;
 }
