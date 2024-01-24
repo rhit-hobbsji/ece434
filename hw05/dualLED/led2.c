@@ -7,19 +7,18 @@
 #include <linux/module.h>
 
 MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Derek Molloy");
-MODULE_DESCRIPTION("A simple Linux LED driver LKM for the BBB");
+MODULE_AUTHOR("Jailen Hobbs");
+MODULE_DESCRIPTION("A simple Linux 2 LED driver LKM for the BBB");
 MODULE_VERSION("0.1");
 
-static unsigned int gpioLED1 = 49;        // GPIO for the first LED
-static unsigned int gpioLED2 = 15;        // GPIO for the second LED
-static unsigned int blinkPeriod1 = 1000;  // The blink period in ms for the first LED
-static unsigned int blinkPeriod2 = 500;   // The blink period in ms for the second LED
+static unsigned int gpioLED1 = 49;        // GPIO for the first LED P9_23
+static unsigned int gpioLED2 = 15;        // GPIO for the second LED P9_24
+static unsigned int blinkPeriod1 = 1000;  // The blink period in ms LED
+static unsigned int blinkPeriod2 = 500;
 
-static struct task_struct *task1;  // The pointer to the first thread task
-static struct task_struct *task2;  // The pointer to the second thread task
+static struct task_struct *task1;  // pointer to the first thread task
+static struct task_struct *task2;  // pointer to the second thread task
 
-// Function prototype for the LED flashing thread
 static int flash(void *arg);
 
 static int flash(void *arg) {
