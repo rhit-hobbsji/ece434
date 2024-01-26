@@ -17,3 +17,17 @@ GPIO output pins for LEDs P9_23 ,P9_24
 
 Accelerometer data in accelerometer file
 Am using accelerometer hooked to i2c-2 bus with address 0x53 (leave cs open)
+
+# hw05 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+|  0/0 | Project 
+|  2/2 | Makefile
+|  5/6 | Kernel Source | Version missing.
+|  6/6 | Kernel Modules: hello, ebbchar, gpio_test, led
+|  4/4 | Etch-a-Sketch
+|  2/2 | Blink at different rates
+| 19/20 | **Total**
+
+*My comments are in italics. --may*
